@@ -2,8 +2,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { CarProps } from "@/types";
-import { calculateCarRent } from "@/utils";
-import { CustomButton } from ".";
+import { calculateCarRent, generateCarImageUrl } from "@/utils";
+import { CustomButton, CarDetails} from ".";
 
 interface CarCardProps {
   car: CarProps;
@@ -27,7 +27,7 @@ const CarCard = ({ car }: CarCardProps) => {
 
       <div className="relative w-full h-40 my-3 object-contain ">
         <Image
-          src="/hero.png"
+          src={generateCarImageUrl(car)}
           // width={50}
           // height={50}  as fill property is given
           alt="car model"
@@ -68,6 +68,7 @@ const CarCard = ({ car }: CarCardProps) => {
           />
         </div>
       </div>
+      <CarDetails isOpen={isOpen} closeModal={() => setIsOpen(false)} car={car} />
     </div>
   );
 };
