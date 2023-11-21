@@ -1,8 +1,14 @@
 // "use client"; // to see data on browsers console
 import { Hero, SearchBar, CustomFilter, CarCard } from "@/components";
 import { fetchCars } from "@/utils";
-export default async function Home() {
-  const allCars = await fetchCars();
+export default async function Home({ searchParams }: any) {
+  const allCars = await fetchCars({
+    manufacturer: searchParams.manufacturer || "",
+    year: searchParams.year || 2023,
+    fuel: searchParams.fuel || "",
+    limit: searchParams.limit || 10,
+    model: searchParams.model || "",
+  });
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
   console.log(allCars); /// we can't see anything in console on browser but on our terminal data is rendered because by default every page and components are server side redered.
